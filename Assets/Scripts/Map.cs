@@ -6,7 +6,7 @@ public class Map
 {
 	public int map_size;
 	public int map_count;
-	public int[,,] map;
+	public string[,,] map;
 
 	public Map(string savedData)
 	{
@@ -24,15 +24,16 @@ public class Map
 			map_count = N["map_count"].AsInt;
 		else
 			return ErrorMap();
-		map = new int[map_count, map_size, map_size];
+		map = new string[map_count, map_size, map_size];
 		for (int i = 0; i < map_count; i++)
 		{
 			for (int j = 0; j < map_size; j++)
 			{
 				for (int k = 0; k < map_size; k++)
 				{
-					if (!(N["map"][i][j][k] != null &&
-						int.TryParse(N["map"][i][j][k].Value, out map[i, j, k])))
+					if (N["map"][i][j][k] != null)
+						map[i, j, k] = N["map"][i][j][k].Value;
+					else
 						return ErrorMap();
 				}
 			}

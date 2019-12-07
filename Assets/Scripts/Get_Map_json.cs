@@ -38,7 +38,7 @@ public class Get_Map_json : MonoBehaviour
 					Get_map?.Invoke(map);
 				}
 				else
-					Debug.Log("Map error");
+					Debug.Log("Map error\n" + json);
 			}
 		}
 	}

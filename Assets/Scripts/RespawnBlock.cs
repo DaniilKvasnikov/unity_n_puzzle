@@ -6,9 +6,11 @@ using UnityEngine;
 public class RespawnBlock : MonoBehaviour
 {
 	public GameObject prefab;
-	public float step = 0.15f;
+	public float step_size = 0.15f;
+	public int currStep;
 
-	private List<Block> blocks = new List<Block>();
+	Dictionary<string, Block> blocks = new Dictionary<string, Block>();
+	Map map;
 
 	private void Awake()
 	{
@@ -17,21 +19,50 @@ public class RespawnBlock : MonoBehaviour
 
 	private void Respawn_blocks(Map map)
 	{
+		this.map = map;
 		Debug.Log("Respawn_blocks");
-		while (blocks.Count > 0)
-			Destroy(blocks[0].gameObject);
+		foreach (KeyValuePair<string, Block> kvp in blocks)
+			Destroy(blocks[kvp.Key].gameObject);
 		for (int i = 0; i < map.map_size; i++)
 		{
 			for (int j = 0; j < map.map_size; j++)
 			{
-				GameObject cube = Instantiate(prefab,
-												new Vector3(i * step, 0, j * step),
-												Quaternion.identity, transform);
+				Vector3 pos = new Vector3(i * step_size, 0, j * step_size);
+				GameObject cube = Instantiate(prefab, pos,
+											Quaternion.identity, transform);
 				Block block = cube.AddComponent<Block>();
 				block.x = i;
 				block.y = j;
-				block.num = map.map[0, i, j];
-				blocks.Add(block);
+				block.pos = pos;
+				block.name = map.map[0, i, j];
+				blocks.Add(map.map[currStep, i, j], block);
+			}
+		}
+	}
+
+	public void NextStep()
+	{
+		if (currStep + 1 < map.map_count)
+			currStep++;
+		SetStep(currStep);
+	}
+
+	public void PrevStep()
+	{
+		if (currStep - 1 >= 0)
+			currStep--;
+		SetStep(currStep);
+	}
+
+	private void SetStep(int step)
+	{
+		Debug.Log("SetStep");
+		for (int i = 0; i < map.map_size; i++)
+		{
+			for (int j = 0; j < map.map_size; j++)
+			{
+				blocks[map.map[step, i, j]].pos =
+					new Vector3(i * step_size, 0, j * step_size);
 			}
 		}
 	}
