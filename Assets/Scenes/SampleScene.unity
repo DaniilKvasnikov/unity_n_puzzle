@@ -902,8 +902,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 380874255944917871, guid: 5be2306b1dce3874b85674827252708f, type: 3}
+  invis_block_name: 15
   step_size: 0.15
-  currStep: 0
+  scale: 0.15
 --- !u!4 &1330657198
 Transform:
   m_ObjectHideFlags: 0

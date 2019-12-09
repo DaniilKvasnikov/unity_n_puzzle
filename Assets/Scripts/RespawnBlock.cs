@@ -8,7 +8,9 @@ public class RespawnBlock : MonoBehaviour
 	public GameObject prefab;
 	public string invis_block_name = "15";
 	public float step_size = 0.15f;
-	public int currStep;
+	public float scale = 0.15f;
+	
+	private int currStep;
 
 	Dictionary<string, Block> blocks = new Dictionary<string, Block>();
 	Map map;
@@ -31,6 +33,7 @@ public class RespawnBlock : MonoBehaviour
 				Vector3 pos = new Vector3(i * step_size, 0, j * step_size);
 				GameObject cube = Instantiate(prefab, pos,
 											Quaternion.identity, transform);
+				cube.transform.localScale = new Vector3(scale, scale, scale);
 				Block block = cube.AddComponent<Block>();
 				block.x = i;
 				block.y = j;
