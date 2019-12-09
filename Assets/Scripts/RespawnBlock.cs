@@ -6,6 +6,7 @@ using UnityEngine;
 public class RespawnBlock : MonoBehaviour
 {
 	public GameObject prefab;
+	public string invis_block_name = "15";
 	public float step_size = 0.15f;
 	public int currStep;
 
@@ -35,6 +36,7 @@ public class RespawnBlock : MonoBehaviour
 				block.y = j;
 				block.pos = pos;
 				block.name = map.map[0, i, j];
+				block.invis = block.name == invis_block_name;
 				blocks.Add(map.map[currStep, i, j], block);
 			}
 		}
