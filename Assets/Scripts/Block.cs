@@ -9,6 +9,8 @@ public class Block : MonoBehaviour
 	public Vector3 pos;
 	public float speed = 0.1f;
 	public bool invis = false;
+	public Sprite sprite;
+	public SpriteRenderer spriteR;
 
 	private void Start()
 	{
@@ -19,6 +21,7 @@ public class Block : MonoBehaviour
 					Random.Range(0f, 1f),
 					Random.Range(0f, 1f)
 				));
+		spriteR.sprite = sprite;
 		cubeRenderer.enabled = !invis;
 	}
 
