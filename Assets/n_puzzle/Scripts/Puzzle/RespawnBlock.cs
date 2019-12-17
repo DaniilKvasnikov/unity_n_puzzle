@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using n_puzzle.Scripts.Web;
+using UnityEditor;
 using UnityEngine;
 
 namespace n_puzzle.Scripts.Puzzle
@@ -12,17 +13,16 @@ namespace n_puzzle.Scripts.Puzzle
 		public float scale = 0.15f;
 		public Texture2D texture;
 	
-		private int currStep;
 
 		Dictionary<string, Block> blocks = new Dictionary<string, Block>();
 		Map map;
 
 		private void Awake()
 		{
-			GetMapJson.GetMap += Respawn_blocks;
+			GetMapJson.GetMap += GetMap;
 		}
 
-		private void Respawn_blocks(Map map)
+		private void GetMap(Map map)
 		{
 			this.map = map;
 			Debug.Log("Respawn_blocks");
@@ -45,27 +45,14 @@ namespace n_puzzle.Scripts.Puzzle
 					block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * i,texture.height / map.map_size * j,texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
 					if (block.name == invis_block_name)
 						block.sprite = null;
-					blocks.Add(map.map[currStep, i, j], block);
+					blocks.Add(map.map[0, i, j], block);
 				}
 			}
 		}
 
-		public void NextStep()
+		public void SetStep(int step)
 		{
-			if (currStep + 1 < map.map_count)
-				currStep++;
-			SetStep(currStep);
-		}
-
-		public void PrevStep()
-		{
-			if (currStep - 1 >= 0)
-				currStep--;
-			SetStep(currStep);
-		}
-
-		private void SetStep(int step)
-		{
+			if (step >= map.map_count || step < 0) return;
 			Debug.Log("SetStep");
 			for (int i = 0; i < map.map_size; i++)
 			{

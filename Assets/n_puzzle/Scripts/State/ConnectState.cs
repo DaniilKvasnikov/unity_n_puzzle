@@ -18,7 +18,7 @@ namespace n_puzzle.Scripts.State
 
         private void GetMap(Map obj)
         {
-            Debug.Log("Getting Map");
+            stateSwitcher.SwitchState<PuzzleState>();
         }
 
         private void Connect(string url)
