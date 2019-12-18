@@ -11,23 +11,16 @@ namespace n_puzzle.Scripts.State
         public RespawnBlock respawn;
         
         private int currStep;
-        private Map map;
 
         private void Awake()
         {
-            GetMapJson.GetMap += GetMap;
             view.Prev += PrevStep;
             view.Next += NextStep;
-        }
-
-        private void GetMap(Map newMap)
-        {
-            map = newMap;
         }
         
         public void NextStep()
         {
-            if (currStep + 1 < map.map_count)
+            if (currStep + 1 < respawn.map.map_count)
                 currStep++;
             respawn.SetStep(currStep);
             view.SetStep(currStep);

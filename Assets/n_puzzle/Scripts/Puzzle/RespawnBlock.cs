@@ -8,14 +8,13 @@ namespace n_puzzle.Scripts.Puzzle
 	public class RespawnBlock : MonoBehaviour
 	{
 		public GameObject prefab;
-		public string invis_block_name = "15";
 		public float step_size = 0.15f;
 		public float scale = 0.15f;
 		public Texture2D texture;
+		[HideInInspector] public Map map;
 	
 
-		Dictionary<string, Block> blocks = new Dictionary<string, Block>();
-		Map map;
+		Dictionary<int, Block> blocks = new Dictionary<int, Block>();
 
 		private void Awake()
 		{
@@ -24,9 +23,10 @@ namespace n_puzzle.Scripts.Puzzle
 
 		private void GetMap(Map map)
 		{
+			int invis_block_name = map.map_size * map.map_size - 1;
 			this.map = map;
 			Debug.Log("Respawn_blocks");
-			foreach (KeyValuePair<string, Block> kvp in blocks)
+			foreach (KeyValuePair<int, Block> kvp in blocks)
 				Destroy(blocks[kvp.Key].gameObject);
 			for (int i = 0; i < map.map_size; i++)
 			{
@@ -40,10 +40,12 @@ namespace n_puzzle.Scripts.Puzzle
 					block.x = i;
 					block.y = j;
 					block.pos = pos;
-					block.name = map.map[0, i, j];
-					block.invis = block.name == invis_block_name;
-					block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * i,texture.height / map.map_size * j,texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
-					if (block.name == invis_block_name)
+					block.num = map.map[0, i, j];
+					block.invis = block.num == invis_block_name;
+					int x = block.num / map.map_size;
+					int y = block.num % map.map_size;
+					block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * x,texture.height / map.map_size * y,texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
+					if (block.num == invis_block_name)
 						block.sprite = null;
 					blocks.Add(map.map[0, i, j], block);
 				}

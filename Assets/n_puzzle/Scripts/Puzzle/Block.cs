@@ -5,7 +5,7 @@ namespace n_puzzle.Scripts.Puzzle
 	public class Block : MonoBehaviour
 	{
 		public int x, y;
-		public string name;
+		public int num;
 		public Vector3 pos;
 		public float speed = 0.1f;
 		public bool invis = false;
