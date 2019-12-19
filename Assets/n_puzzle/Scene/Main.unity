@@ -523,7 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee26f71381754c69ac69ebb68f9a2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  getMapJson: {fileID: 175488128}
 --- !u!4 &175488127
 Transform:
   m_ObjectHideFlags: 0
@@ -550,7 +549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1c4198564287d479187e122630a2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  webController: {fileID: 175488126}
 --- !u!114 &175488129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa3b21c90c2a41ad86b7d7992c2251c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleState: {fileID: 2099213088}
 --- !u!1 &184532958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,7 +1761,8 @@ MonoBehaviour:
   disableWhenHidden: 1
   stateSwitcher: {fileID: 0}
   view: {fileID: 1237154971}
-  webController: {fileID: 175488126}
+  getFilesList: {fileID: 175488129}
+  filesURL: files
 --- !u!114 &1237154971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2908,6 +2908,7 @@ MonoBehaviour:
   next: {fileID: 1727270636}
   step: {fileID: 2055554683}
   fileList: {fileID: 265493801}
+  getMapJson: {fileID: 175488128}
 --- !u!114 &2099213088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2924,6 +2925,4 @@ MonoBehaviour:
   stateSwitcher: {fileID: 0}
   view: {fileID: 2099213087}
   respawn: {fileID: 196345652}
-  getFilesList: {fileID: 175488129}
-  webController: {fileID: 175488126}
-  filesURL: files
+  getMapJson: {fileID: 175488128}

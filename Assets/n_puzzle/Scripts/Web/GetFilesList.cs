@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BestHTTP;
+using n_puzzle.Scripts.State;
 using SimpleJSON;
 using UnityEngine;
 
@@ -8,6 +9,12 @@ namespace n_puzzle.Scripts.Web
 {
     public class GetFilesList : MonoBehaviour
     {
+        public PuzzleState puzzleState;
+        private void Awake()
+        {
+            OnGetFilesList += puzzleState.OnGetFilesList;
+        }
+
         public event Action<string[]> OnGetFilesList;
     
         public void UpdateMap(string url)

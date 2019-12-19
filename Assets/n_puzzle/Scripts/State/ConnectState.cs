@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using n_puzzle.Scripts.Puzzle;
 using n_puzzle.Scripts.Web;
 using UnityEngine;
@@ -8,7 +9,9 @@ namespace n_puzzle.Scripts.State
     public class ConnectState : global::State
     {
         public ConnectView view;
-        public WebController webController;
+        public GetFilesList getFilesList;
+
+        public string filesURL = "files";
 
         private void Awake()
         {
@@ -23,7 +26,8 @@ namespace n_puzzle.Scripts.State
 
         private void Connect(string url)
         {
-            webController.Connect(url);
+            WebController.URL = url;
+            getFilesList.UpdateMap(Path.Combine(WebController.URL, filesURL));
         }
     }
 }

@@ -28,6 +28,8 @@ namespace n_puzzle.Scripts.Puzzle
 			Debug.Log("Respawn_blocks");
 			foreach (KeyValuePair<int, Block> kvp in blocks)
 				Destroy(blocks[kvp.Key].gameObject);
+			blocks.Clear();
+
 			for (int i = 0; i < map.map_size; i++)
 			{
 				for (int j = 0; j < map.map_size; j++)

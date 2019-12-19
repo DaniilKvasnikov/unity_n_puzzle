@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using n_puzzle.Scripts.Web;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +12,7 @@ namespace n_puzzle.Scripts.State
         [SerializeField] private Button next;
         [SerializeField] private Text step;
         [SerializeField] private Dropdown fileList;
-
+        [SerializeField] private GetMapJson getMapJson;
         public event Action Prev;
         public event Action Next;
 
@@ -18,6 +20,12 @@ namespace n_puzzle.Scripts.State
         {
             prev.onClick.AddListener(OnPrev);
             next.onClick.AddListener(OnNext);
+            fileList.onValueChanged.AddListener(OnFileChange);
+        }
+
+        private void OnFileChange(int num)
+        {
+            getMapJson.UpdateMap(Path.Combine(WebController.URL, "get", fileList.options[num].text));
         }
 
         public void SetStep(int currentStep)

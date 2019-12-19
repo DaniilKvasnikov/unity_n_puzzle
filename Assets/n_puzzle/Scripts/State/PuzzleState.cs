@@ -10,10 +10,7 @@ namespace n_puzzle.Scripts.State
     {
         public PuzzleView view;
         public RespawnBlock respawn;
-        public GetFilesList getFilesList;
-        public WebController webController;
-
-        public string filesURL = "files";
+        public GetMapJson getMapJson;
         
         private int currStep;
 
@@ -21,19 +18,14 @@ namespace n_puzzle.Scripts.State
         {
             view.Prev += PrevStep;
             view.Next += NextStep;
-            getFilesList.OnGetFilesList += OnGetFilesList;
-            webController.EndConnect += EndConnect;
         }
 
-        private void EndConnect(string obj)
-        {
-            getFilesList.UpdateMap(Path.Combine(WebController.URL, filesURL));
-        }
-
-        private void OnGetFilesList(string[] files)
+        public void OnGetFilesList(string[] files)
         {
             foreach (var file in files)
                 view.AddFile(file);
+            if (files.Length > 0)
+                getMapJson.UpdateMap(Path.Combine(WebController.URL, "get", files[0]));
         }
 
         public void NextStep()
