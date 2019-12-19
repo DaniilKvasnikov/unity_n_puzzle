@@ -18,6 +18,7 @@ namespace n_puzzle.Scripts.State
 
         protected virtual void OnConnect()
         {
+            Container.URL = inputURL.text;
             Connect?.Invoke(inputURL.text);
         }
     }

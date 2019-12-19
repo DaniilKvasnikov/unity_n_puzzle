@@ -9,6 +9,7 @@ namespace n_puzzle.Scripts.State
         [SerializeField] private Button prev;
         [SerializeField] private Button next;
         [SerializeField] private Text step;
+        [SerializeField] private Dropdown fileList;
 
         public event Action Prev;
         public event Action Next;
@@ -32,6 +33,14 @@ namespace n_puzzle.Scripts.State
         protected virtual void OnNext()
         {
             Next?.Invoke();
+        }
+
+        public void AddFile(string file_name)
+        {
+            Debug.Log(file_name);
+            fileList.options.Add (new Dropdown.OptionData() {text=file_name});
+            fileList.value = 1;
+            fileList.value = 0;
         }
     }
 }

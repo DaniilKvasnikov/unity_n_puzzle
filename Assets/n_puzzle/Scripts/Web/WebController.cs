@@ -1,17 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace n_puzzle.Scripts.Web
 {
     public class WebController : MonoBehaviour
     {
         public GetMapJson getMapJson;
+        public event Action<string> EndConnect;
         
-        private string url;
+        public static string URL;
         public void Connect(string newUrl)
         {
-            url = newUrl;
-            Debug.Log("Connect to " + url);
-            getMapJson.UpdateMap(url);
+            URL = newUrl;
+            Debug.Log("Connect to " + URL);
+            getMapJson.UpdateMap(URL);
+        }
+
+        public virtual void OnEndConnect(string url)
+        {
+            EndConnect?.Invoke(url);
         }
     }
 }
