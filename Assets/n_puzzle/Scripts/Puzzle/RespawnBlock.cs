@@ -42,9 +42,8 @@ namespace n_puzzle.Scripts.Puzzle
 
 		private void RespawnBlockXY(int i, int j, int invis_block_name)
 		{
-			Vector3 pos = new Vector3((-map.map_size / 2 + i) * step_size, 0, (-map.map_size / 2 + j) * step_size);
-			GameObject cube = Instantiate(prefab, pos,
-				Quaternion.identity, transform);
+			Vector3 pos = new Vector3((-map.map_size / 2 + i) * step_size, transform.position.y, (-map.map_size / 2 + j) * step_size);
+			GameObject cube = Instantiate(prefab, pos, Quaternion.identity, transform);
 			cube.transform.localScale = new Vector3(scale, scale, scale);
 			Block block = cube.GetComponent<Block>();
 			block.pos = pos;
@@ -68,8 +67,7 @@ namespace n_puzzle.Scripts.Puzzle
 			{
 				for (int j = 0; j < map.map_size; j++)
 				{
-					blocks[map.map[step, i, j]].pos =
-						new Vector3((-map.map_size / 2 + i) * step_size, 0, (-map.map_size / 2 + j) * step_size);
+					blocks[map.map[step, i, j]].pos = new Vector3((-map.map_size / 2 + i) * step_size, transform.position.y, (-map.map_size / 2 + j) * step_size);
 				}
 			}
 		}
