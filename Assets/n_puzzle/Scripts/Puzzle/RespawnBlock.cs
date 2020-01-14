@@ -35,24 +35,29 @@ namespace n_puzzle.Scripts.Puzzle
 			{
 				for (int j = 0; j < map.map_size; j++)
 				{
-					Vector3 pos = new Vector3(i * step_size, 0, j * step_size);
-					GameObject cube = Instantiate(prefab, pos,
-						Quaternion.identity, transform);
-					cube.transform.localScale = new Vector3(scale, scale, scale);
-					Block block = cube.GetComponent<Block>();
-					block.pos = pos;
-					block.num = map.map[0, i, j];
-					block.invis = (block.num == invis_block_name);
-					int x = block.num % map.map_size;
-					int y = block.num / map.map_size;
-					block.x = x;
-					block.y = y;
-					block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * x,texture.height / map.map_size * (map.map_size - 1 - y),texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
-					if (block.num == invis_block_name)
-						block.sprite = null;
-					blocks.Add(map.map[0, i, j], block);
+					RespawnBlockXY(i, j, invis_block_name);
 				}
 			}
+		}
+
+		private void RespawnBlockXY(int i, int j, int invis_block_name)
+		{
+			Vector3 pos = new Vector3((-map.map_size / 2 + i) * step_size, 0, (-map.map_size / 2 + j) * step_size);
+			GameObject cube = Instantiate(prefab, pos,
+				Quaternion.identity, transform);
+			cube.transform.localScale = new Vector3(scale, scale, scale);
+			Block block = cube.GetComponent<Block>();
+			block.pos = pos;
+			block.num = map.map[0, i, j];
+			block.invis = (block.num == invis_block_name);
+			int x = block.num % map.map_size;
+			int y = block.num / map.map_size;
+			block.x = x;
+			block.y = y;
+			block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * x,texture.height / map.map_size * (map.map_size - 1 - y),texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
+			if (block.num == invis_block_name)
+				block.sprite = null;
+			blocks.Add(map.map[0, i, j], block);
 		}
 
 		public void SetStep(int step)
@@ -64,7 +69,7 @@ namespace n_puzzle.Scripts.Puzzle
 				for (int j = 0; j < map.map_size; j++)
 				{
 					blocks[map.map[step, i, j]].pos =
-						new Vector3(i * step_size, 0, j * step_size);
+						new Vector3((-map.map_size / 2 + i) * step_size, 0, (-map.map_size / 2 + j) * step_size);
 				}
 			}
 		}
