@@ -15,12 +15,12 @@ namespace n_puzzle.Scripts.Puzzle
 		private void Start()
 		{
 			var cubeRenderer = gameObject.GetComponentInChildren<Renderer>();
-			cubeRenderer.material.SetColor("_Color",
-				new Color(
-					Random.Range(0f, 1f),
-					Random.Range(0f, 1f),
-					Random.Range(0f, 1f)
-				));
+			// cubeRenderer.material.SetColor("_Color",
+			// 	new Color(
+			// 		Random.Range(0f, 1f),
+			// 		Random.Range(0f, 1f),
+			// 		Random.Range(0f, 1f)
+			// 	));
 			spriteR.sprite = sprite;
 			cubeRenderer.enabled = !invis;
 		}

@@ -15,6 +15,7 @@ namespace n_puzzle.Scripts.State
         [SerializeField] private GetMapJson getMapJson;
         public event Action Prev;
         public event Action Next;
+        public event Action MapUpdate;
 
         private void Awake()
         {
@@ -26,6 +27,7 @@ namespace n_puzzle.Scripts.State
         private void OnFileChange(int num)
         {
             getMapJson.UpdateMap(Path.Combine(WebController.URL, "get", fileList.options[num].text));
+            MapUpdate?.Invoke();
         }
 
         public void SetStep(int currentStep)

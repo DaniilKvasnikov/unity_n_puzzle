@@ -8,10 +8,12 @@ namespace n_puzzle.Scripts.Puzzle
 	public class RespawnBlock : MonoBehaviour
 	{
 		public GameObject prefab;
-		public float step_size = 0.15f;
-		public float scale = 0.15f;
 		public Texture2D texture;
+		public float full_width;
 		[HideInInspector] public Map map;
+		
+		private float step_size = 0.15f;
+		private float scale = 0.15f;
 	
 
 		Dictionary<int, Block> blocks = new Dictionary<int, Block>();
@@ -23,6 +25,8 @@ namespace n_puzzle.Scripts.Puzzle
 
 		private void GetMap(Map map)
 		{
+			scale = full_width / (float)map.map_size;
+			step_size = scale;
 			int invis_block_name = map.map_size * map.map_size - 1;
 			Debug.Log("invis_block_name " + invis_block_name);
 			this.map = map;

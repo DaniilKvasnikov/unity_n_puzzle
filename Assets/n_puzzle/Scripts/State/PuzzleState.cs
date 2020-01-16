@@ -18,6 +18,12 @@ namespace n_puzzle.Scripts.State
         {
             view.Prev += PrevStep;
             view.Next += NextStep;
+            view.MapUpdate += MapUpdate;
+        }
+
+        private void MapUpdate()
+        {
+                view.SetStep(currStep = 0);
         }
 
         public void OnGetFilesList(string[] files)
