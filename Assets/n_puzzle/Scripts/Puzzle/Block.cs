@@ -23,7 +23,7 @@ namespace n_puzzle.Scripts.Puzzle
 
 		private void Update()
 		{
-			transform.position = Vector3.Lerp(transform.position, pos, speed);
+			transform.localPosition = Vector3.Lerp(transform.localPosition, pos, speed);
 		}
 
 		public void SetText(string text)
