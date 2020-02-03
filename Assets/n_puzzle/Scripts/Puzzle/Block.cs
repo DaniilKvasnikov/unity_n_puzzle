@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 namespace n_puzzle.Scripts.Puzzle
 {
@@ -11,16 +12,11 @@ namespace n_puzzle.Scripts.Puzzle
 		public bool invis = false;
 		public Sprite sprite;
 		public SpriteRenderer spriteR;
+		public TextMeshPro textOut;
 
 		private void Start()
 		{
 			var cubeRenderer = gameObject.GetComponentInChildren<Renderer>();
-			// cubeRenderer.material.SetColor("_Color",
-			// 	new Color(
-			// 		Random.Range(0f, 1f),
-			// 		Random.Range(0f, 1f),
-			// 		Random.Range(0f, 1f)
-			// 	));
 			spriteR.sprite = sprite;
 			cubeRenderer.enabled = !invis;
 		}
@@ -28,6 +24,11 @@ namespace n_puzzle.Scripts.Puzzle
 		private void Update()
 		{
 			transform.position = Vector3.Lerp(transform.position, pos, speed);
+		}
+
+		public void SetText(string text)
+		{
+			textOut.text = text;
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace n_puzzle.Scripts.Puzzle
 		{
 			scale = full_width / (float)map.map_size;
 			step_size = scale;
-			int invis_block_name = map.map_size * map.map_size - 1;
+			int invis_block_name = 0;
 			Debug.Log("invis_block_name " + invis_block_name);
 			this.map = map;
 			Debug.Log("Respawn_blocks");
@@ -47,7 +47,8 @@ namespace n_puzzle.Scripts.Puzzle
 		private void RespawnBlockXY(int i, int j, int invis_block_name)
 		{
 			Vector3 pos = new Vector3((-map.map_size / 2 + i) * step_size, transform.position.y, (-map.map_size / 2 + j) * step_size);
-			GameObject cube = Instantiate(prefab, pos, Quaternion.identity, transform);
+			GameObject cube = Instantiate(prefab, transform, false);
+			cube.transform.localPosition = pos;
 			cube.transform.localScale = new Vector3(scale, scale, scale);
 			Block block = cube.GetComponent<Block>();
 			block.pos = pos;
@@ -57,7 +58,7 @@ namespace n_puzzle.Scripts.Puzzle
 			int y = block.num / map.map_size;
 			block.x = x;
 			block.y = y;
-			block.sprite = Sprite.Create(texture, new Rect(texture.width / map.map_size * x,texture.height / map.map_size * (map.map_size - 1 - y),texture.width / map.map_size,texture.height / map.map_size), new Vector2(1.0f, 1.0f));
+			block.SetText(block.num == 0 ? "" : block.num.ToString());
 			if (block.num == invis_block_name)
 				block.sprite = null;
 			blocks.Add(map.map[0, i, j], block);
