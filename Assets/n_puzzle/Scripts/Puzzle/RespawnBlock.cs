@@ -67,7 +67,6 @@ namespace n_puzzle.Scripts.Puzzle
 		public void SetStep(int step)
 		{
 			if (step >= map.map_count || step < 0) return;
-			Debug.Log("SetStep");
 			for (int i = 0; i < map.map_size; i++)
 			{
 				for (int j = 0; j < map.map_size; j++)

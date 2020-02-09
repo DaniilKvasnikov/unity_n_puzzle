@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class KeyButton : MonoBehaviour
 {
     [SerializeField] private KeyCode key;
+    [SerializeField] private bool loop;
     
     private Button button;
 
@@ -21,6 +22,12 @@ public class KeyButton : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(key))
+            Down();
+    }
+
+    private void FixedUpdate()
+    {
+        if (loop && Input.GetKey(key))
             Down();
     }
     

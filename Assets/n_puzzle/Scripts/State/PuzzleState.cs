@@ -23,7 +23,7 @@ namespace n_puzzle.Scripts.State
 
         private void MapUpdate()
         {
-                view.SetStep(currStep = 0);
+            view.SetStep(currStep = 0);
         }
 
         public void OnGetFilesList(string[] files)

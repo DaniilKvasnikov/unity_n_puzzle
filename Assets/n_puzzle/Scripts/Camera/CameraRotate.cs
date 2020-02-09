@@ -9,7 +9,7 @@ public class CameraRotate : MonoBehaviour
     public Vector3 rotate;
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             rotate.y = rotate.y + horizontalSpeed * Input.GetAxis("Mouse X");
             if (rotate.y > 360) rotate.y -= 360;
